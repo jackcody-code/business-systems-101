@@ -5,9 +5,11 @@ const { calculateDailyRevenue } = require("./services/revenue");
 const { formatCurrency } = require("./utils/format");
 const { writeDailyReport } = require("./services/writeReport");
 const { config } = require("./config");
+const { calculateDailyRevenue } = require("./services/revenueService");
 
 const appointmentsPath = path.join(__dirname, "..", "data", "appointments.json");
 const appointments = loadAppointments(appointmentsPath, config);
+const revenue = calculateDailyRevenue(appointments);
 
 const dailyRevenue = calculateDailyRevenue(appointments, config);
 
@@ -15,7 +17,7 @@ const reportText =
   `Daily Revenue Report\n` +
   `-------------------\n` +
   `Appointments: ${appointments.length}\n` +
-  `Revenue: ${formatCurrency(dailyRevenue, config)}\n`;
+  `Revenue: ${formatCurrency(revenue, config)}\n`;
 
 console.log(reportText);
 

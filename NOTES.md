@@ -75,3 +75,11 @@ Tests helped expose:
 
 Key lesson:
 Tests must reflect real behavior, not imagined rules.
+## Day 9 – Service Layer
+
+I moved revenue calculation into a dedicated service.
+
+Why this matters:
+- index.js now coordinates instead of calculating
+- business logic lives in one place
+- changes are safer and easier to reason about
