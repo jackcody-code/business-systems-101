@@ -1,16 +1,17 @@
-const appointments = [
-    { client: "Ashley", price: 420 },
-    { client: "Hawk", price: 1000 },
-    { client: "Fox", price: 1000 }
-];
-
-module.exports = { appointments };
 const APPOINTMENT_STATUS = {
-    REQUESTED: "requested",
-    CONFIRMED: "confirmed",
-    COMPLETED: "completed",
-    CANCELED: "canceled",
+  REQUESTED: "requested",
+  CONFIRMED: "confirmed",
+  COMPLETED: "completed",
+  CANCELED: "canceled",
 };
+
+const VALID_TRANSITIONS = {
+  requested: ["confirmed", "canceled"],
+  confirmed: ["completed", "canceled"],
+  completed: [],
+  canceled: [],
+};
+
 function transitionAppointment(appointment, newStatus) {
   const currentStatus = appointment.status;
 
@@ -31,6 +32,7 @@ function transitionAppointment(appointment, newStatus) {
     status: newStatus,
   };
 }
+
 module.exports = {
   APPOINTMENT_STATUS,
   transitionAppointment,

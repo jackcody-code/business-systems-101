@@ -91,3 +91,8 @@ Key takeaways:
 - validation belongs at system boundaries
 - services should assume valid data
 - tests caught structural mistakes quickly
+# Day 11 – Appointment Status Model
+
+I created a state machine for appointments with explicit allowed transitions.
+This adds guardrails that prevent invalid business behavior (like completing a canceled appointment).
+I wrote tests to prove valid transitions are allowed and invalid ones are blocked.
