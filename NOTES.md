@@ -106,3 +106,7 @@ Services orchestrate updates and persistence, and the domain later remains pure 
 Built a reporting service that aggregates appointment data by status.
 Learned how missing imports can break services even when tests are correct.
 Reporting is now a first-class concern, not an afterthought.
+# Day 15 – Weekly Reports
+Built a weekly reporting service that summarizes revenue and appointment status.
+Learned how pure functions make reporting predictable and testable.
+This mirrors how real business dashboards are built.
