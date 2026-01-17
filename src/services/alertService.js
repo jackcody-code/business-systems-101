@@ -1,3 +1,26 @@
+/**
+ * Alert Service
+ *
+ * Purpose:
+ * Evaluates operational metrics against predefined thresholds
+ * to identify business risk conditions that require operator attention.
+ *
+ * Alerts exist to surface problems early, before they are visible
+ * through revenue loss or customer impact.
+ *
+ * Examples of risks detected:
+ * - Low completion rate
+ * - High cancellation rate
+ * - Revenue trending below expectations
+ *
+ * Audience:
+ * Owner / operator of a service-based business who needs proactive
+ * signals, not retrospective reports.
+ *
+ * This service is intentionally stateless and deterministic.
+ * Given the same metrics, it will always produce the same alerts.
+ */// Determines whether current operational metrics indicate business risk
+
 function evaluateAlerts(metrics, thresholds = {}) {
     const alerts = [];
 
