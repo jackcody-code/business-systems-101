@@ -144,3 +144,12 @@ I also debugged and fixed a real integration issue where alert logic expected a 
 * Verified alerts trigger correctly and print deterministic, operator-readable output.
 
 **Status:** Alerting pipeline works end-to-end; system now signals action instead of just reporting state.
+# Day 21 — Alert Signal Quality & Priority Refinement
+
+* Improved alert signal clarity so messages are immediately understandable to an operator.
+* Added a CRITICAL alert for zero appointments tomorrow and ensured it takes priority over warning-level alerts.
+* Refined alert ordering to prevent duplicate or noisy signals.
+* Validated alert output reads clearly and communicates urgency without requiring interpretation.
+* Confirmed the dashboard now surfaces actionable signals instead of ambiguous warnings.
+
+**Status:** Alerting is clearer, prioritized, and operator-grade; system communicates urgency correctly.

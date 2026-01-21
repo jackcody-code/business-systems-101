@@ -26,7 +26,7 @@ function main() {
   // ✅ Evaluate alerts AFTER data exists
   const alerts = evaluateAlerts({
     appointmentsTomorrow,
-    threshold: 3,
+    threshold: 5,
   });
 
   console.log("\n=== Twin Suns OS: Operator Dashboard (Daily) ===\n");
