@@ -162,3 +162,12 @@ I also debugged and fixed a real integration issue where alert logic expected a 
 * Confirmed alerting now feels reliable rather than noisy or reactive.
 
 **Status:** Alert system is tuned, trustworthy, and calibrated for real operator use.
+# Day 23 — Alert Notifications via Email
+
+- Implemented a notification delivery layer to send operator alerts outside the CLI.
+- Wired alert evaluation to email delivery using Nodemailer with a configurable kill switch.
+- Secured credentials using environment variables and validated `.env` loading.
+- Successfully authenticated with Gmail using an App Password.
+- Verified end-to-end flow: alert → notification → inbox delivery.
+
+**Status:** Alert system now delivers real notifications reliably and safely.
