@@ -1,12 +1,38 @@
 const nodemailer = require("nodemailer");
+const { alreadySentToday, markSentToday, todayKey } = require("./notificationStateService");
 
 function bool(v) {
   return String(v).toLowerCase() === "true";
 }
 
-async function sendNotification(message) {
-  // Kill switch
+function buildSubject(alerts) {
+  const hasCritical = alerts.some((a) => String(a).toUpperCase().includes("CRITICAL"));
+  if (hasCritical) return "Twin Suns OS — CRITICAL Alert";
+  return `Twin Suns OS — Daily Alerts (${alerts.length})`;
+}
+
+function buildBody(alerts) {
+  const timestamp = new Date().toLocaleString();
+  const lines = [
+    `Twin Suns OS Alerts — ${todayKey()}`,
+    `Generated: ${timestamp}`,
+    "",
+    "Alerts:",
+    ...alerts.map((a) => `- ${a}`),
+    "",
+  ];
+  return lines.join("\n");
+}
+
+async function sendDailyAlertEmail(alerts) {
   if (!bool(process.env.ENABLE_EMAIL_NOTIFICATIONS)) return;
+  if (!alerts || alerts.length === 0) return;
+
+  // ✅ Once per day gate
+  if (alreadySentToday()) {
+    console.log("[NOTIFICATION] Skipped (already sent today)");
+    return;
+  }
 
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT || 465);
@@ -28,10 +54,17 @@ async function sendNotification(message) {
     auth: { user, pass },
   });
 
-  const subject = "Twin Suns OS Alert";
-  const text = message;
+  await transporter.sendMail({
+    from,
+    to,
+    subject: buildSubject(alerts),
+    text: buildBody(alerts),
+  });
 
-  await transporter.sendMail({ from, to, subject, text });
+  markSentToday();
+  console.log("[NOTIFICATION] Sent daily alert email");
 }
 
-module.exports = { sendNotification };
+module.exports = {
+  sendDailyAlertEmail,
+};

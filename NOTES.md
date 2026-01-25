@@ -171,3 +171,13 @@ I also debugged and fixed a real integration issue where alert logic expected a 
 - Verified end-to-end flow: alert → notification → inbox delivery.
 
 **Status:** Alert system now delivers real notifications reliably and safely.
+# Day 25 — Daily Alert Digest & Notification Guardrails
+
+- Implemented a once-per-day notification gate to prevent alert spam.
+- Added lightweight notification state tracking using a local JSON file.
+- Refactored email delivery to send a single daily digest per run instead of per alert.
+- Improved alert email subject and body for operator clarity and urgency.
+- Ensured notification delivery failures do not break dashboard execution.
+
+**Status:** Alerts now deliver safely, intentionally, and at operator-appropriate frequency.
+

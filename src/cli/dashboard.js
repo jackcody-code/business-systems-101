@@ -7,7 +7,8 @@ const fs = require("node:fs");
 const { loadAppointments } = require("../data/loadAppointments");
 const { buildDailyReport, saveDailyReport } = require("../services/reportService");
 const { evaluateAlerts } = require("../services/alertService");
-const { sendNotification } = require("../services/notificationService");
+const { sendDailyAlertEmail } = require("../services/notificationService");
+
 
 async function main() {
   const baseDir = path.join(__dirname, "..", "..", "data");
@@ -42,9 +43,12 @@ async function main() {
     alerts.forEach((a) => console.log(`- ${a}`));
 
     // Email/SMS/etc (async-safe)
-    for (const alert of alerts) {
-      await sendNotification(alert);
-    }
+    try {
+  await sendDailyAlertEmail(alerts);
+} catch (e) {
+  console.error("Notification failed:", e.message);
+}
+
   }
 }
 
